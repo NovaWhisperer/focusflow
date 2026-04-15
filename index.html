@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4E1F00">
+    <title>FocusFlow — Productivity Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="./assets/favicon.svg" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="main">
+
+        <nav>
+            <div class="nav-in">
+                <div class="nav-brand">
+                    <i class="ri-focus-3-line"></i>
+                    <h2>FocusFlow</h2>
+                </div>
+                <span class="nav-tagline">Stay sharp. Stay focused.</span>
+                <div class="theme" title="Toggle dark mode" aria-label="Toggle dark mode" role="button" tabindex="0">
+                    <i class="ri-sun-line"></i>
+                </div>
+            </div>
+        </nav>
+
+        <section class="allElems">
+            <header>
+                <div class="header-1">
+                    <h2>1 April 3000</h2>
+                    <h1>Saturday, 1:00:00 PM</h1>
+                    <h4><i class="ri-map-pin-line"></i> Hamirpur (HP)</h4>
+                </div>
+                <div class="header-2">
+                    <h2>20 °C</h2>
+                    <h4>Light Rain</h4>
+                    <div class="weather-stats">
+                        <h3 class="weather-precip"><i class="ri-drop-line"></i> Precipitation: 35%</h3>
+                        <h3 class="weather-humidity"><i class="ri-water-percent-line"></i> Humidity: 49%</h3>
+                        <h3 class="weather-wind"><i class="ri-windy-line"></i> Wind: 10 km/h</h3>
+                    </div>
+                </div>
+            </header>
+
+            <div class="section-label"><span>Your Workspace</span></div>
+
+            <div class="allFeatures">
+                <div class="todo elem" id="0" data-card="task" tabindex="0">
+                    <picture>
+                        <source media="(max-width: 767px)" srcset="./assets/Task%20Board%20Portrait.png">
+                        <img src="./assets/Task Board.png" alt="Task Board" loading="lazy">
+                    </picture>
+                    <div class="elem-overlay"></div>
+                    <div class="elem-info"><i class="ri-checkbox-circle-line"></i><h2>Task Board</h2></div>
+                </div>
+
+                <div class="daily elem" id="1" data-card="plan" tabindex="0">
+                    <picture>
+                        <source media="(max-width: 767px)" srcset="./assets/Day%20Planner%20Portrait.png">
+                        <img src="./assets/Day Planner.png" alt="Day Planner" loading="lazy">
+                    </picture>
+                    <div class="elem-overlay"></div>
+                    <div class="elem-info"><i class="ri-calendar-schedule-line"></i><h2>Day Planner</h2></div>
+                </div>
+
+                <div class="moti elem" id="2" data-card="inspire" tabindex="0">
+                    <picture>
+                        <source media="(max-width: 767px)" srcset="./assets/Inspire%20Me%20Portrait.png">
+                        <img src="./assets/Inspire Me.png" alt="Inspire Me" loading="lazy">
+                    </picture>
+                    <div class="elem-overlay"></div>
+                    <div class="elem-info"><i class="ri-sparkling-line"></i><h2>Inspire Me</h2></div>
+                </div>
+
+                <div class="pomo elem" id="3" data-card="focus" tabindex="0">
+                    <picture>
+                        <source media="(max-width: 767px)" srcset="./assets/Focus%20Time%20Portrait.png">
+                        <img src="./assets/Focus Time.png" alt="Focus Timer" loading="lazy">
+                    </picture>
+                    <div class="elem-overlay"></div>
+                    <div class="elem-info"><i class="ri-timer-flash-line"></i><h2>Focus Timer</h2></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Task Board ── -->
+        <section class="fullElem todo-list-fullpage">
+            <div class="page-header">
+                <div class="page-title"><i class="ri-checkbox-circle-line"></i><h2>Task Board</h2></div>
+                <button class="back" id="0" aria-label="Close Task Board"><i class="ri-close-line"></i> Close</button>
+            </div>
+            <div class="todo-container">
+                <div class="addTask">
+                    <h3 class="panel-label">New Task</h3>
+                    <form id="task-form">
+                        <input id="task-input" type="text" placeholder="What needs to be done?" autocomplete="off">
+                        <textarea id="textarea" rows="5" placeholder="Add details, notes or context..." autocomplete="off"></textarea>
+                        <div class="mark-imp">
+                            <input type="checkbox" name="checkbox" id="check">
+                            <label for="check"><i class="ri-flag-2-line"></i> Mark as Important</label>
+                        </div>
+                        <button type="submit"><i class="ri-add-line"></i> Add Task</button>
+                    </form>
+                </div>
+                <div class="allTask">
+                    <div class="allTask-header">
+                        <h3 class="panel-label">Your Tasks</h3>
+                        <span class="task-count" id="task-count">0 tasks</span>
+                    </div>
+                    <div class="task-list-inner"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Day Planner ── -->
+        <section class="fullElem daily-planner-fullpage">
+            <div class="page-header">
+                <div class="page-title"><i class="ri-calendar-schedule-line"></i><h1>Day Planner</h1></div>
+                <button class="back" id="1" aria-label="Close Day Planner"><i class="ri-close-line"></i> Close</button>
+            </div>
+            <div class="day-planner"></div>
+        </section>
+
+        <!-- ── Inspire Me ── -->
+        <section class="fullElem motivational-fullpage">
+            <div class="page-header">
+                <div class="page-title"><i class="ri-sparkling-line"></i><h1>Daily Inspiration</h1></div>
+                <button class="back" id="2" aria-label="Close Inspiration"><i class="ri-close-line"></i> Close</button>
+            </div>
+            <div class="motivation-fullPage-container">
+                <div class="motivation-container">
+                    <div class="motivation-wrapper">
+                        <div class="quote-deco"><i class="ri-double-quotes-l"></i></div>
+                        <div class="motivation-1"><h2>Quote of the Day</h2></div>
+                        <div class="motivation-2"><p></p></div>
+                        <div class="motivation-3"><span></span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Focus Timer — SVG ring removed, plain display only ── -->
+        <section class="fullElem pomodoro-fullpage">
+            <div class="page-header">
+                <div class="page-title"><i class="ri-timer-flash-line"></i><h2>Focus Timer</h2></div>
+                <button class="back" id="3" aria-label="Close Focus Timer"><i class="ri-close-line"></i> Close</button>
+            </div>
+
+            <div class="pomo-body">
+                <div class="pomo-card">
+                    <h4 class="session">Work Session</h4>
+
+                    <div class="pomo-display">
+                        <h1 class="pomo-time">25:00</h1>
+                        <p class="pomo-label">remaining</p>
+                    </div>
+
+                    <div class="pomo-btns">
+                        <button class="start-timer" aria-label="Start timer"><i class="ri-play-fill"></i> Start</button>
+                        <button class="pause-timer" aria-label="Pause timer"><i class="ri-pause-fill"></i> Pause</button>
+                        <button class="reset-timer" aria-label="Reset timer"><i class="ri-refresh-line"></i> Reset</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,2009 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap");
+
+// ════════════════════════════════════════════════════════
+//  ROOT FONT SIZE — mobile-first
+//  Base = 50% (8px/rem) for tiny screens.
+//  Scales up at each breakpoint.
+// ════════════════════════════════════════════════════════
+html {
+    font-size: 50%; // 1rem = 8px  — mobile base (<480px)
+    height: 100%;
+    overscroll-behavior: none;
+
+    @media (min-width: 30em) {
+        font-size: 56.25%;
+    } // 9px  — 480px+
+    @media (min-width: 48em) {
+        font-size: 59%;
+    } // ~9.4px — 768px+
+    @media (min-width: 75em) {
+        font-size: 62.5%;
+    } // 10px — 1200px+
+}
+
+// ════════════════════════════════════════════════════════
+//  DESIGN TOKENS
+// ════════════════════════════════════════════════════════
+
+// ── Type scale ─────────────────────────────────────────
+$fs-xs: 1rem;
+$fs-sm: 1.1rem;
+$fs-md: 1.3rem;
+$fs-lg: 1.5rem;
+$fs-xl: 2rem;
+$fs-2xl: 2.6rem;
+
+$fs-clock: clamp(2.2rem, 4.5vw, 5.4rem);
+$fs-temp: clamp(2.4rem, 5vw, 5.6rem);
+$fs-quote: clamp(1.6rem, 2.8vw, 3.2rem);
+$fs-pomo: clamp(5rem, 10vw, 12rem);
+
+$fw-normal: 400;
+$fw-medium: 500;
+$fw-semi: 600;
+$fw-bold: 700;
+$fw-black: 800;
+
+// ── Spacing scale ──────────────────────────────────────
+$sp-xs: 0.8rem;
+$sp-sm: 1.2rem;
+$sp-md: 1.6rem;
+$sp-lg: 2rem;
+$sp-xl: 2.4rem;
+$sp-2xl: 3.2rem;
+$sp-3xl: 3.6rem;
+
+// ── Per-card accent colors ─────────────────────────────
+$accent-task: #feba17;
+$accent-plan: #60a5fa;
+$accent-inspire: #c084fc;
+$accent-focus: #4ade80;
+
+// ════════════════════════════════════════════════════════
+//  CSS CUSTOM PROPERTIES
+// ════════════════════════════════════════════════════════
+:root {
+    // Nav height — mobile base, scales up via min-width queries
+    --nav-height: 5.8rem;
+
+    @media (min-width: 30em) {
+        --nav-height: 6rem;
+    }
+    @media (min-width: 48em) {
+        --nav-height: 6.4rem;
+    }
+    @media (min-width: 75em) {
+        --nav-height: 7.2rem;
+    }
+
+    // Core palette
+    --pri: #fcdec0;
+    --sec: #4e1f00;
+    --tri1: #feba17;
+    --tri2: #74512d;
+    --red: #e53935;
+    --green: #419541;
+    --blue: #37528d;
+
+    --border: rgba(252, 222, 192, 0.12);
+    --shadow-sm: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 0.8rem 3.2rem rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 2rem 6rem rgba(0, 0, 0, 0.4);
+
+    --radius-sm: 0.8rem;
+    --radius-md: 1.4rem;
+    --radius-lg: 2rem;
+    --radius-xl: 2.8rem;
+
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --nav-bg-from: var(--tri2);
+    --nav-bg-to: rgba(116, 81, 45, 0.7);
+
+    --pomo-tint: rgba(65, 149, 65, 0.08);
+
+    --theme-transition: background-color 0.35s ease, border-color 0.35s ease, color 0.25s ease, box-shadow 0.35s ease;
+}
+
+// ── Dark mode overrides ────────────────────────────────
+.dark {
+    --pri: #f8f4e1;
+    --sec: #141618;
+    --tri1: #a89880;
+    --tri2: #252830;
+    --border: rgba(248, 244, 225, 0.09);
+    --shadow-sm: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 0.8rem 3.2rem rgba(0, 0, 0, 0.6);
+    --shadow-lg: 0 2rem 6rem rgba(0, 0, 0, 0.7);
+    --nav-bg-from: #2a2d36;
+    --nav-bg-to: #1e2028;
+}
+
+// ── Per-card CSS custom properties ────────────────────
+[data-card="task"] {
+    --card-accent: #{$accent-task};
+    --card-glow: rgba(254, 186, 23, 0.22);
+}
+[data-card="plan"] {
+    --card-accent: #{$accent-plan};
+    --card-glow: rgba(96, 165, 250, 0.22);
+}
+[data-card="inspire"] {
+    --card-accent: #{$accent-inspire};
+    --card-glow: rgba(192, 132, 252, 0.22);
+}
+[data-card="focus"] {
+    --card-accent: #{$accent-focus};
+    --card-glow: rgba(74, 222, 128, 0.22);
+}
+
+// ── Per-section page header tints ─────────────────────
+.todo-list-fullpage {
+    --page-accent: rgba(254, 186, 23, 0.12);
+}
+.daily-planner-fullpage {
+    --page-accent: rgba(96, 165, 250, 0.12);
+}
+.motivational-fullpage {
+    --page-accent: rgba(192, 132, 252, 0.12);
+}
+.pomodoro-fullpage {
+    --page-accent: rgba(74, 222, 128, 0.12);
+}
+
+// ════════════════════════════════════════════════════════
+//  RESET
+// ════════════════════════════════════════════════════════
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+input,
+textarea {
+    user-select: text;
+    -webkit-user-select: text;
+}
+
+// ════════════════════════════════════════════════════════
+//  SCROLLBARS
+// ════════════════════════════════════════════════════════
+html,
+body,
+#main,
+.allElems,
+.task-list-inner,
+.todo-container,
+.addTask,
+.allTask,
+.motivational-fullpage,
+.pomodoro-fullpage {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+.daily-planner-fullpage .day-planner {
+    &::-webkit-scrollbar {
+        width: 0.3rem;
+    }
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: var(--tri1);
+        border-radius: 0.4rem;
+    }
+}
+
+// ════════════════════════════════════════════════════════
+//  BASE
+// ════════════════════════════════════════════════════════
+body {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+    font-family: "Poppins", sans-serif;
+    font-size: $fs-md;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: var(--pri);
+    transition: var(--theme-transition);
+}
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+:focus-visible {
+    outline: 2px solid var(--tri1);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+}
+.elem:focus-visible {
+    outline-color: var(--card-accent, var(--tri1));
+    outline-width: 3px;
+}
+
+// ════════════════════════════════════════════════════════
+//  ANIMATIONS
+// ════════════════════════════════════════════════════════
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY($sp-md);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes logoPulse {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(0.86);
+        opacity: 0.65;
+    }
+}
+@keyframes cardReveal {
+    from {
+        opacity: 0;
+        transform: translateY($sp-2xl) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+@keyframes ringPulse {
+    0%,
+    100% {
+        opacity: 0.85;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+@keyframes quoteReveal {
+    from {
+        opacity: 0;
+        transform: translateY(2rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    #main,
+    .fullElem {
+        transition: opacity 0.01ms ease !important;
+    }
+}
+
+// ════════════════════════════════════════════════════════
+//  MIXINS
+// ════════════════════════════════════════════════════════
+@mixin glass($blur: 1.6rem, $bg-opacity: 0.22, $border-opacity: 0.13) {
+    background: rgba(0, 0, 0, $bg-opacity);
+    border: 1px solid rgba(255, 255, 255, $border-opacity);
+
+    @supports (backdrop-filter: blur(1px)) {
+        backdrop-filter: blur($blur) saturate(1.5);
+        -webkit-backdrop-filter: blur($blur) saturate(1.5);
+        background: rgba(0, 0, 0, calc(#{$bg-opacity} - 0.06));
+    }
+}
+
+@mixin page-header-bg {
+    background: linear-gradient(120deg, var(--nav-bg-from) 0%, var(--nav-bg-to) 100%);
+}
+
+// ════════════════════════════════════════════════════════
+//  LAYOUT — ROOT
+// ════════════════════════════════════════════════════════
+#main {
+    height: 100vh;
+    height: 100dvh;
+    width: 100%;
+    background-color: var(--sec);
+    opacity: 0;
+    transition:
+        opacity 0.9s ease,
+        background-color 0.35s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    &.loaded {
+        opacity: 1;
+    }
+}
+.dark #main {
+    background-image:
+        radial-gradient(ellipse at 18% 55%, rgba(168, 152, 128, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at 85% 18%, rgba(168, 152, 128, 0.04) 0%, transparent 52%);
+}
+
+// ════════════════════════════════════════════════════════
+//  NAVIGATION — MOBILE FIRST
+//  Base styles target mobile (<480px).
+//  Scale up with min-width queries.
+// ════════════════════════════════════════════════════════
+
+// ── Outer strip ─────────────────────────────────────────
+nav {
+    width: 100%;
+    height: var(--nav-height);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+
+    // Mobile base: very tight — the pill needs every pixel
+    padding: 0.4rem 0.6rem 0;
+
+    @media (min-width: 30em) {
+        padding: 0.5rem $sp-sm 0;
+    } // 480px
+    @media (min-width: 48em) {
+        padding: $sp-sm $sp-xl 0;
+    } // 768px
+    @media (min-width: 75em) {
+        padding: $sp-sm $sp-2xl 0;
+    } // 1200px
+}
+
+// ════════════════════════════════════════════════════════
+//  NAVIGATION — CSS GRID, MOBILE FIRST
+//
+//  HTML structure (flattened — no .nav-right wrapper):
+//    .nav-in
+//      ├── .nav-brand   → grid column 1 (auto)
+//      ├── .nav-tagline → grid column 2 (1fr)
+//      └── .theme       → grid column 3 (auto)
+//
+//  Grid guarantees:
+//    col 1 = brand's exact content width
+//    col 2 = ALL remaining space — tagline fills and clips here
+//    col 3 = toggle's exact content width
+//  No flex shrink math. No max-width hacks. No overflow tricks.
+// ════════════════════════════════════════════════════════
+
+nav {
+    width: 100%;
+    height: var(--nav-height);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    overflow: visible; // allow pill shadow to show, but clip toggle glow
+
+    padding: 0.6rem 0.8rem 0;
+
+    @media (min-width: 30em) {
+        padding: 0.7rem $sp-sm 0;
+    }
+    @media (min-width: 48em) {
+        padding: $sp-sm $sp-xl 0;
+    }
+    @media (min-width: 75em) {
+        padding: $sp-sm $sp-2xl 0;
+    }
+}
+
+.nav-in {
+    width: 100%;
+    height: 100%;
+
+    // ── 3-column grid ──────────────────────────────────
+    // auto | 1fr | auto
+    // brand takes content width, tagline gets everything
+    // in the middle, toggle takes content width.
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+
+    // Column gaps — scale up with screen
+    column-gap: 0.8rem;
+
+    @media (min-width: 30em) {
+        column-gap: 1rem;
+    }
+    @media (min-width: 48em) {
+        column-gap: $sp-xl;
+    }
+    @media (min-width: 75em) {
+        column-gap: $sp-2xl;
+    }
+
+    @include page-header-bg;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    transition: var(--theme-transition);
+
+    @supports (backdrop-filter: blur(1px)) {
+        backdrop-filter: blur(1.2rem);
+    }
+
+    padding: 0.6rem 1.2rem;
+
+    @media (min-width: 30em) {
+        padding: $sp-xs $sp-md;
+    }
+    @media (min-width: 48em) {
+        padding: $sp-sm $sp-xl;
+    }
+    @media (min-width: 75em) {
+        padding: $sp-sm $sp-2xl;
+    }
+}
+
+// ── Grid column 1: Brand ────────────────────────────────
+// grid places this in column 1 (auto) — exact content size
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    @media (min-width: 48em) {
+        gap: $sp-xs;
+    }
+
+    i {
+        font-size: clamp(1.4rem, 3.8vw, 2.2rem);
+        color: var(--tri1);
+        animation: logoPulse 3s ease-in-out infinite;
+        transition: color 0.35s ease;
+        flex-shrink: 0;
+    }
+
+    h2 {
+        font-size: clamp(1.3rem, 3.8vw, 2rem);
+        font-weight: $fw-bold;
+        color: var(--pri);
+        letter-spacing: -0.03em;
+        white-space: nowrap;
+        transition: color 0.35s ease;
+    }
+}
+
+// ── Grid column 2: Tagline ──────────────────────────────
+// Gets the 1fr track — all space between brand and toggle.
+// min-width: 0 lets the grid cell shrink below text content.
+// overflow + text-overflow clips text when cell is too small.
+.nav-tagline {
+    // Clip to grid cell — never overflow into adjacent columns
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    // Centered in the middle track
+    text-align: center;
+
+    color: var(--pri);
+    opacity: 0.4;
+    font-style: italic;
+    font-weight: $fw-normal;
+    letter-spacing: 0.02em;
+    transition:
+        color 0.35s ease,
+        opacity 0.35s ease;
+
+    // vw-based: scales with actual viewport pixels
+    // 375px → 3.4vw ≈ 12.75px | 430px → 3.4vw ≈ 14.6px
+    font-size: clamp(0.85rem, 3.4vw, $fs-md);
+
+    @media (min-width: 48em) {
+        font-size: $fs-md;
+        letter-spacing: 0.04em;
+        text-align: right; // right-align on larger screens
+    }
+}
+
+// ── Grid column 3: Theme toggle ─────────────────────────
+// auto column — always its exact content size.
+// The 1fr tagline column absorbs all pressure; toggle is never touched.
+.theme {
+    background-color: var(--pri);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // No flex-shrink needed — grid auto column is always exact size
+    transition:
+        var(--transition),
+        background-color 0.35s ease;
+
+    padding: 0.42em 0.55em;
+
+    @media (min-width: 30em) {
+        padding: 0.48em 0.62em;
+    }
+    @media (min-width: 48em) {
+        padding: 0.55em 0.72em;
+    }
+    @media (min-width: 75em) {
+        padding: 0.6em 0.8em;
+    }
+
+    i {
+        color: var(--sec);
+        font-size: clamp(1.2rem, 3.5vw, 1.7rem);
+        pointer-events: none;
+        transition: color 0.35s ease;
+    }
+
+    &:hover {
+        transform: rotate(30deg) scale(1.1);
+        box-shadow: 0 0.2rem 0.6rem rgba(254, 186, 23, 0.4); // tight shadow, won't bleed
+    }
+    &:active {
+        transform: scale(0.93);
+    }
+}
+
+// ════════════════════════════════════════════════════════
+//  DASHBOARD SECTION — MOBILE FIRST
+// ════════════════════════════════════════════════════════
+section.allElems {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    animation: fadeSlideUp 0.6s ease both;
+
+    // Mobile: ultra-tight — every pixel goes to the cards
+    padding: $sp-xs $sp-xs $sp-xs;
+    gap: 0.4vh;
+
+    @media (min-width: 30em) {
+        padding: $sp-xs $sp-sm $sp-sm;
+        gap: 0.5vh;
+    }
+    @media (min-width: 48em) {
+        padding: $sp-sm $sp-xl $sp-md;
+        gap: 0.8vh;
+    }
+    @media (min-width: 75em) {
+        padding: $sp-sm $sp-2xl $sp-md;
+        gap: 1vh;
+    }
+}
+
+// ════════════════════════════════════════════════════════
+//  WEATHER / HERO HEADER — MOBILE FIRST
+//  Always row layout. Height in dvh so browser chrome
+//  never steals space. Fonts shrink on mobile.
+// ════════════════════════════════════════════════════════
+.allElems header {
+    width: 100%;
+    flex: 0 0 auto;
+    border-radius: var(--radius-xl);
+
+    // CSS Grid: left col fills (1fr), right col is content-width (auto)
+    // This guarantees the clock never bleeds into the weather panel
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+
+    // Mobile: max-height caps the header so cards always get flex:1 remainder
+    // 28dvh on 667px = ~187px — enough for date+clock+location+temp+stats
+    height: auto;
+    min-height: 7rem;
+    max-height: 28dvh;
+    padding: $sp-xs $sp-sm;
+    gap: $sp-xs;
+
+    @media (min-width: 30em) {
+        // 480px
+        max-height: 30dvh;
+        padding: $sp-sm $sp-md;
+    }
+    @media (min-width: 48em) {
+        // 768px
+        height: clamp(12rem, 28vh, 20rem);
+        padding: 0; // grid children manage their own spacing
+        gap: 0;
+        align-items: stretch; // both columns fill full header height
+    }
+    @media (min-width: 75em) {
+        // 1200px
+        height: clamp(12rem, 29vh, 22rem);
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(110deg, rgba(0, 0, 0, 0.58) 0%, rgba(0, 0, 0, 0.22) 50%, rgba(0, 0, 0, 0.06) 100%);
+        border-radius: inherit;
+        pointer-events: none;
+        z-index: 1;
+    }
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: -0.2rem;
+        left: 0;
+        right: 0;
+        height: 7rem;
+        background: linear-gradient(to bottom, transparent 0%, var(--sec) 100%);
+        pointer-events: none;
+        z-index: 2;
+        transition: background 0.35s ease;
+    }
+}
+
+.header-1,
+.header-2 {
+    position: relative;
+    z-index: 3;
+}
+
+// ── Left: date / clock / location ───────────────────────
+.header-1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+    overflow: hidden;
+    gap: 0.1rem;
+
+    @media (min-width: 48em) {
+        gap: $sp-xs;
+        padding: $sp-xl $sp-2xl; // desktop: left/bottom breathing room
+        padding-top: $sp-xl;
+        justify-content: center;
+    }
+
+    @media (min-width: 75em) {
+        padding: $sp-xl $sp-3xl;
+    }
+
+    h2 {
+        // Date pill
+        display: inline-flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 2em;
+        font-weight: $fw-semi;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #fff;
+        white-space: nowrap;
+
+        font-size: clamp(0.6rem, 2vw, $fs-xs);
+        padding: 0.15em 0.7em;
+
+        @media (min-width: 48em) {
+            font-size: $fs-xs;
+            padding: 0.3em 1.1em;
+            letter-spacing: 0.2em;
+        }
+    }
+
+    h1 {
+        // Clock
+        font-weight: $fw-black;
+        color: #fff;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        text-shadow: 0 0.3rem 3rem rgba(0, 0, 0, 0.45);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: clip;
+        width: 100%; // fills the 1fr column — clip triggers at column edge
+
+        font-size: clamp(1.3rem, 4.8vw, 2.2rem);
+
+        @media (min-width: 30em) {
+            font-size: clamp(1.5rem, 5.2vw, 2.6rem);
+        }
+        @media (min-width: 48em) {
+            font-size: $fs-clock;
+        }
+    }
+
+    h4 {
+        // Location pill
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        background: rgba(255, 255, 255, 0.11);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 2em;
+        font-weight: $fw-normal;
+        color: rgba(255, 255, 255, 0.88);
+        white-space: nowrap;
+
+        font-size: clamp(0.6rem, 2vw, $fs-sm);
+        padding: 0.15em 0.7em 0.15em 0.5em;
+
+        @media (min-width: 48em) {
+            font-size: $fs-sm;
+            padding: 0.3em 1.1em 0.3em 0.8em;
+            gap: 0.5rem;
+        }
+    }
+}
+
+// ── Right: frosted weather card ──────────────────────────
+// No backdrop-filter anywhere — causes repaint artifacts on hover.
+// Solid semi-transparent background on all screen sizes.
+.header-2 {
+    background: rgba(0, 0, 0, 0.42);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: right;
+    gap: 0.1rem;
+    align-self: start;
+
+    // Mobile: compact
+    padding: $sp-xs $sp-sm;
+
+    @media (min-width: 48em) {
+        background: rgba(0, 0, 0, 0.45);
+        border: none;
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+        padding: $sp-xl $sp-2xl;
+        gap: 0.2rem;
+        min-width: 18rem;
+        height: 100%;
+        overflow: hidden;
+        justify-content: center;
+        align-self: stretch;
+    }
+
+    @media (min-width: 75em) {
+        padding: $sp-xl $sp-3xl;
+        min-width: 20rem;
+    }
+
+    h2 {
+        // Temperature
+        font-weight: $fw-black;
+        color: #fff;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        white-space: nowrap;
+        text-align: right;
+
+        font-size: clamp(1.4rem, 5vw, 2.4rem);
+
+        @media (min-width: 48em) {
+            font-size: $fs-temp;
+        }
+    }
+
+    h4 {
+        // Condition
+        font-weight: $fw-medium;
+        color: rgba(255, 255, 255, 0.88);
+        white-space: nowrap;
+        text-align: right;
+
+        font-size: clamp(0.65rem, 2vw, 1.2rem);
+        margin-top: 0;
+
+        @media (min-width: 48em) {
+            font-size: 1.4rem;
+            margin-top: 0.2rem;
+        }
+    }
+}
+
+// Weather stat rows — flex child of .header-2, always inside the glass
+.weather-stats {
+    display: none; // hidden on mobile (<480px)
+
+    @media (min-width: 30em) {
+        // 480px+: compact horizontal row
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.1rem 0.5rem;
+        width: 100%;
+        margin-top: 0.25rem;
+        padding-top: 0.25rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.13);
+    }
+
+    @media (min-width: 48em) {
+        // 768px+: vertical column
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 0.1rem;
+        margin-top: $sp-sm;
+        padding-top: $sp-sm;
+    }
+
+    h3 {
+        font-weight: $fw-normal;
+        color: rgba(255, 255, 255, 0.7);
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        white-space: nowrap;
+        justify-content: flex-end;
+        width: 100%;
+        font-size: clamp(0.6rem, 1.8vw, $fs-sm);
+        line-height: 1.4;
+
+        @media (min-width: 48em) {
+            line-height: 1.75;
+            font-size: $fs-sm;
+            gap: 0.5rem;
+        }
+    }
+}
+
+// ── Section divider ────────────────────────────────────
+.section-label {
+    display: flex;
+    align-items: center;
+    gap: $sp-md;
+    flex-shrink: 0;
+
+    span {
+        font-size: $fs-xs;
+        font-weight: $fw-semi;
+        text-transform: uppercase;
+        letter-spacing: 0.32em;
+        color: var(--pri);
+        opacity: 0.26;
+        white-space: nowrap;
+        transition: color 0.35s ease;
+    }
+
+    &::before,
+    &::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(to right, transparent 0%, var(--border) 25%, var(--border) 75%, transparent 100%);
+    }
+}
+
+// ════════════════════════════════════════════════════════
+//  FEATURE CARDS — MOBILE FIRST
+//  flex:1 always — cards fill whatever space remains.
+//  The weather header is capped so cards always get enough.
+// ════════════════════════════════════════════════════════
+.allFeatures {
+    display: grid;
+    flex: 1;
+    min-height: 0;
+
+    // Mobile base: 2×2 grid
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: $sp-xs;
+
+    @media (min-width: 30em) {
+        gap: $sp-sm;
+    }
+
+    // 768px+: 4 columns, single row — fills height via flex:1
+    @media (min-width: 48em) {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 1fr;
+        gap: $sp-sm;
+    }
+
+    // Landscape phones: 4 columns single row
+    @media (max-height: 31.25em) and (orientation: landscape) {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 1fr;
+    }
+
+    // 1200px desktop: wider gaps
+    @media (min-width: 75em) {
+        gap: 1.5vw;
+    }
+}
+
+.elem {
+    min-width: 0;
+    min-height: 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    isolation: isolate;
+    position: relative;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    background: #000;
+    animation: cardReveal 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+
+    &:nth-child(1) {
+        animation-delay: 0.05s;
+    }
+    &:nth-child(2) {
+        animation-delay: 0.12s;
+    }
+    &:nth-child(3) {
+        animation-delay: 0.19s;
+    }
+    &:nth-child(4) {
+        animation-delay: 0.26s;
+    }
+
+    img,
+    picture {
+        height: 100%;
+        width: 100%;
+        display: block;
+    }
+
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: center center;
+        border-radius: var(--radius-lg);
+        transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 0.25rem;
+        background: var(--card-accent, var(--tri1));
+        transform: scaleX(0);
+        transform-origin: left center;
+        opacity: 0;
+        transition:
+            transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+            opacity 0.3s ease;
+        z-index: 5;
+    }
+
+    &:hover {
+        will-change: transform;
+        box-shadow:
+            var(--shadow-lg),
+            0 0 4rem var(--card-glow, rgba(254, 186, 23, 0.2));
+        transform: translateY(-0.5rem);
+
+        img {
+            transform: scale(1.07);
+        }
+        &::after {
+            transform: scaleX(1);
+            opacity: 1;
+        }
+        .elem-info i {
+            transform: scale(1.18) translateY(-0.2rem);
+        }
+    }
+
+    &:active {
+        transform: scale(0.98);
+        will-change: auto;
+    }
+    &:not(:hover) {
+        will-change: auto;
+    }
+}
+
+.elem-overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.88) 0%,
+        rgba(0, 0, 0, 0.55) 20%,
+        rgba(0, 0, 0, 0.12) 55%,
+        transparent 100%
+    );
+}
+.dark .elem-overlay {
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.93) 0%,
+        rgba(0, 0, 0, 0.6) 22%,
+        rgba(0, 0, 0, 0.15) 56%,
+        transparent 100%
+    );
+}
+
+.elem-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: $sp-xs $sp-sm $sp-sm;
+    display: flex;
+    align-items: center;
+    gap: $sp-xs;
+    z-index: 3;
+
+    i {
+        font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+        color: var(--card-accent, var(--tri1));
+        flex-shrink: 0;
+        transition:
+            transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+            color 0.35s ease;
+        filter: drop-shadow(0 0 0.6rem var(--card-accent, var(--tri1)));
+    }
+
+    h2 {
+        font-size: clamp(1.2rem, 2.2vw, $fs-lg);
+        font-weight: $fw-semi;
+        color: #fff;
+        text-shadow: 0 0.1rem 0.8rem rgba(0, 0, 0, 0.6);
+    }
+}
+
+// ════════════════════════════════════════════════════════
+//  FULL-SCREEN SECTIONS (shared)
+// ════════════════════════════════════════════════════════
+.fullElem {
+    position: fixed;
+    inset: 0;
+    height: 100vh;
+    height: 100dvh;
+    width: 100vw;
+    background-color: var(--sec);
+    transition: background-color 0.35s ease;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 200;
+    animation: fadeSlideUp 0.35s ease both;
+}
+
+// Shared page header bar
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(
+        120deg,
+        var(--nav-bg-from) 0%,
+        var(--nav-bg-to) 80%,
+        var(--page-accent, transparent) 100%
+    );
+    flex-shrink: 0;
+    height: var(--nav-height);
+    transition: var(--theme-transition);
+
+    // Mobile base: tight padding
+    padding: $sp-xs $sp-md;
+
+    @media (min-width: 30em) {
+        padding: $sp-xs $sp-lg;
+    } // 480px
+    @media (min-width: 48em) {
+        padding: $sp-sm $sp-xl;
+    } // 768px
+    @media (min-width: 75em) {
+        padding: $sp-md $sp-2xl;
+    } // 1200px
+}
+
+.page-title {
+    display: flex;
+    align-items: center;
+    gap: $sp-sm;
+    min-width: 0;
+
+    i {
+        font-size: clamp(1.5rem, 3vw, $fs-xl);
+        color: var(--tri1);
+        transition: color 0.35s ease;
+        flex-shrink: 0;
+    }
+
+    h1,
+    h2 {
+        font-size: clamp(1.6rem, 3.5vw, $fs-2xl);
+        font-weight: $fw-bold;
+        color: var(--pri);
+        letter-spacing: -0.04em;
+        transition: color 0.35s ease;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+// Close button
+.back {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    font-weight: $fw-semi;
+    border-radius: var(--radius-lg);
+    border: 1.5px solid rgba(229, 57, 53, 0.45);
+    background: rgba(229, 57, 53, 0.1);
+    color: #ff7875;
+    cursor: pointer;
+    transition: var(--transition);
+    flex-shrink: 0;
+
+    // Mobile: compact
+    padding: 0.6em $sp-sm;
+    font-size: $fs-sm;
+
+    @media (min-width: 30em) {
+        padding: 0.65em $sp-md;
+        font-size: $fs-sm;
+    } // 480px
+    @media (min-width: 48em) {
+        padding: 0.7em $sp-md;
+        font-size: $fs-md;
+    } // 768px
+    @media (min-width: 75em) {
+        padding: 0.75em $sp-lg;
+        font-size: $fs-md;
+    } // 1200px
+
+    i {
+        font-size: 1.5rem;
+        pointer-events: none;
+        transition: transform 0.25s ease;
+    }
+
+    &:hover {
+        background: var(--red);
+        border-color: var(--red);
+        color: #fff;
+        transform: translateY(-0.1rem);
+        box-shadow: 0 0.4rem 1.6rem rgba(229, 57, 53, 0.4);
+        i {
+            transform: rotate(90deg);
+        }
+    }
+    &:active {
+        transform: scale(0.96);
+    }
+}
+
+// ════════════════════════════════════════════════════════
+//  TASK BOARD — MOBILE FIRST
+// ════════════════════════════════════════════════════════
+.todo-list-fullpage {
+    .todo-container {
+        flex: 1;
+        width: 100%;
+        display: flex;
+        overflow: hidden;
+        min-height: 0;
+
+        // Mobile: vertical stack, scrollable
+        flex-direction: column;
+        padding: $sp-sm $sp-md;
+        gap: $sp-sm;
+        overflow-y: auto;
+
+        @media (min-width: 30em) {
+            padding: $sp-md $sp-lg;
+        } // 480px
+        @media (min-width: 48em) {
+            // 768px+: side by side
+            flex-direction: row;
+            padding: $sp-lg $sp-xl;
+            gap: $sp-lg;
+            overflow: hidden;
+        }
+        @media (min-width: 75em) {
+            padding: $sp-lg $sp-2xl;
+        } // 1200px
+    }
+
+    .todo-container .addTask {
+        background: linear-gradient(160deg, var(--tri2), rgba(116, 81, 45, 0.45));
+        border-radius: var(--radius-lg);
+        padding: $sp-lg;
+        border: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        transition: var(--theme-transition);
+        flex-shrink: 0;
+
+        // Mobile: full width, auto height
+        width: 100%;
+        height: auto;
+
+        // 768px+: sidebar
+        @media (min-width: 48em) {
+            width: 30%;
+            min-width: 24rem;
+            height: 100%;
+        }
+    }
+
+    .todo-container .allTask {
+        background: linear-gradient(160deg, var(--tri2), rgba(116, 81, 45, 0.35));
+        border-radius: var(--radius-lg);
+        padding: $sp-lg;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid var(--border);
+        transition: var(--theme-transition);
+
+        // Mobile: auto height with min
+        flex: unset;
+        height: auto;
+        min-height: 24rem;
+
+        // 768px+: fills remaining space
+        @media (min-width: 48em) {
+            flex: 1;
+            height: 100%;
+            min-height: unset;
+        }
+    }
+}
+
+.dark {
+    .todo-container .addTask {
+        background: linear-gradient(160deg, rgba(37, 40, 48, 0.95) 0%, rgba(26, 28, 34, 0.8) 100%);
+    }
+    .todo-container .allTask {
+        background: linear-gradient(160deg, rgba(30, 32, 40, 0.9) 0%, rgba(20, 22, 28, 0.75) 100%);
+    }
+}
+
+.panel-label {
+    font-size: $fs-sm;
+    font-weight: $fw-semi;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    opacity: 0.42;
+    margin-bottom: $sp-md;
+    flex-shrink: 0;
+}
+
+.todo-container .addTask form {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    flex: 1;
+
+    #task-input,
+    textarea {
+        padding: 1em $sp-md;
+        width: 100%;
+        font-size: $fs-md;
+        border-radius: var(--radius-sm);
+        border: 1.5px solid transparent;
+        outline: none;
+        background: rgba(252, 222, 192, 0.09);
+        color: var(--pri);
+        transition: var(--transition);
+
+        &::placeholder {
+            color: var(--pri);
+            opacity: 0.35;
+        }
+        &:focus {
+            border-color: var(--tri1);
+            background: rgba(252, 222, 192, 0.14);
+        }
+    }
+
+    textarea {
+        resize: none;
+        flex: 1;
+    }
+
+    button {
+        padding: 1em $sp-lg;
+        width: 100%;
+        font-size: $fs-md;
+        background: var(--tri1);
+        color: var(--sec);
+        font-weight: $fw-bold;
+        border-radius: var(--radius-sm);
+        border: none;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6em;
+        flex-shrink: 0;
+
+        &:hover {
+            background: #ffc93d;
+            transform: translateY(-0.1rem);
+        }
+        &:active {
+            transform: scale(0.97);
+        }
+    }
+}
+
+.mark-imp {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    padding: 0.9em $sp-sm;
+    background: rgba(229, 57, 53, 0.1);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(229, 57, 53, 0.2);
+    cursor: pointer;
+    flex-shrink: 0;
+
+    input {
+        transform: scale(1.2);
+        accent-color: var(--red);
+        cursor: pointer;
+    }
+    label {
+        font-size: $fs-md;
+        font-weight: $fw-medium;
+        color: var(--pri);
+        opacity: 0.85;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+    }
+}
+
+.allTask-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $sp-md;
+    flex-shrink: 0;
+}
+
+.task-count {
+    font-size: $fs-sm;
+    font-weight: $fw-semi;
+    background: var(--tri1);
+    color: var(--sec);
+    padding: 0.3em 1em;
+    border-radius: 2em;
+    transition: var(--theme-transition);
+}
+
+.task-list-inner {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: $sp-xs;
+    min-height: 0;
+
+    &:empty::after {
+        content: "No tasks yet.\A Add one to get started.";
+        white-space: pre;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        height: 100%;
+        font-size: $fs-md;
+        color: var(--pri);
+        opacity: 0.25;
+        line-height: 1.8;
+        letter-spacing: 0.02em;
+    }
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: rgba(252, 222, 192, 0.07);
+    padding: 1em $sp-md;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    transition: var(--transition);
+    gap: $sp-sm;
+    flex-shrink: 0;
+
+    &:hover {
+        background: rgba(252, 222, 192, 0.12);
+        border-color: rgba(254, 186, 23, 0.28);
+    }
+
+    details {
+        flex: 1;
+        cursor: pointer;
+        min-width: 0;
+        summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            &::-webkit-details-marker {
+                display: none;
+            }
+        }
+        &[open] summary h5 {
+            color: var(--tri1);
+        }
+    }
+
+    h5 {
+        color: var(--pri);
+        font-size: $fs-md;
+        font-weight: $fw-medium;
+        display: flex;
+        align-items: center;
+        gap: 0.7em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        span {
+            background-color: var(--red);
+            color: #fff;
+            padding: 0.1em 0.7em;
+            border-radius: 2em;
+            font-size: $fs-xs;
+            font-weight: $fw-semi;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            flex-shrink: 0;
+            &.true {
+                opacity: 1;
+            }
+            &.false {
+                opacity: 0;
+                pointer-events: none;
+            }
+        }
+    }
+
+    button {
+        padding: 0.5em $sp-md;
+        color: #fff;
+        background: var(--green);
+        font-size: $fs-xs;
+        border-radius: var(--radius-sm);
+        border: none;
+        font-weight: $fw-semi;
+        cursor: pointer;
+        transition: var(--transition);
+        white-space: nowrap;
+        flex-shrink: 0;
+        &:hover {
+            background: #2e6b2e;
+            transform: translateY(-0.1rem);
+        }
+        &:active {
+            transform: scale(0.96);
+        }
+    }
+}
+
+.task-details {
+    color: var(--pri);
+    font-size: $fs-md;
+    padding: 0.7em 0.2em 0.2em;
+    opacity: 0.45;
+    line-height: 1.5;
+}
+
+// ════════════════════════════════════════════════════════
+//  DAY PLANNER — MOBILE FIRST
+// ════════════════════════════════════════════════════════
+.daily-planner-fullpage .day-planner {
+    flex: 1;
+    display: grid;
+    overflow-y: auto;
+    min-height: 0;
+
+    // Mobile: single column, tight padding, slots pack to top
+    grid-template-columns: 1fr;
+    align-content: start;
+    padding: $sp-sm $sp-md;
+    gap: 0.6vh 0;
+
+    @media (min-width: 30em) {
+        padding: $sp-sm $sp-lg;
+    }
+
+    @media (min-width: 48em) {
+        // 768px+: two columns, stretch to fill height
+        grid-template-columns: repeat(2, 1fr);
+        align-content: stretch; // slots grow to fill remaining space
+        padding: $sp-md $sp-xl;
+        gap: 1vh 1vw;
+    }
+
+    @media (min-width: 75em) {
+        padding: $sp-md $sp-2xl;
+    }
+
+    .day-planner-time {
+        position: relative;
+        min-height: 5.5rem; // mobile: fixed minimum
+
+        @media (min-width: 48em) {
+            min-height: unset;
+        } // desktop: stretch fills the space
+
+        p {
+            position: absolute;
+            top: 0.6rem;
+            left: $sp-sm;
+            font-size: $fs-xs;
+            font-weight: $fw-semi;
+            color: var(--tri1);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            pointer-events: none;
+            z-index: 1;
+            transition: color 0.35s ease;
+        }
+
+        input {
+            padding: 2.2rem $sp-sm 0.6rem;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--tri2), rgba(116, 81, 45, 0.45));
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: $fs-md;
+            font-weight: $fw-medium;
+            outline: none;
+            color: var(--pri);
+            transition: var(--transition);
+
+            &::placeholder {
+                opacity: 0.2;
+            }
+            &:focus {
+                border-color: var(--tri1);
+                background: linear-gradient(135deg, var(--tri2), rgba(116, 81, 45, 0.7));
+            }
+        }
+    }
+}
+
+// ════════════════════════════════════════════════════════
+//  DAILY INSPIRATION — MOBILE FIRST
+// ════════════════════════════════════════════════════════
+.motivational-fullpage {
+    position: fixed;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    background-image:
+        radial-gradient(ellipse at 30% 50%, rgba(192, 132, 252, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 75% 40%, rgba(254, 186, 23, 0.06) 0%, transparent 55%);
+
+    .motivation-fullPage-container {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        // Mobile: tighter padding
+        padding: $sp-md;
+
+        @media (min-width: 30em) {
+            padding: $sp-lg;
+        } // 480px
+        @media (min-width: 48em) {
+            padding: $sp-xl $sp-2xl;
+        } // 768px+
+    }
+
+    .motivation-container {
+        width: min(82rem, 96%);
+        position: relative;
+        animation: quoteReveal 0.5s cubic-bezier(0.34, 1.2, 0.64, 1) both;
+        animation-delay: 0.1s;
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: -3rem;
+            background: radial-gradient(
+                ellipse at 50% 50%,
+                rgba(192, 132, 252, 0.1) 0%,
+                rgba(254, 186, 23, 0.06) 40%,
+                transparent 70%
+            );
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .motivation-wrapper {
+            position: relative;
+            z-index: 10;
+            border-radius: var(--radius-xl);
+            background: linear-gradient(
+                145deg,
+                rgba(116, 81, 45, 0.65) 0%,
+                rgba(78, 31, 0, 0.55) 50%,
+                rgba(37, 40, 48, 0.5) 100%
+            );
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            box-shadow:
+                var(--shadow-lg),
+                0 0 0 1px rgba(192, 132, 252, 0.1);
+            overflow: hidden;
+
+            // Mobile: tight padding
+            padding: $sp-xl $sp-lg;
+
+            @media (min-width: 30em) {
+                padding: $sp-2xl $sp-xl;
+            } // 480px
+            @media (min-width: 48em) {
+                padding: $sp-3xl min(8%, 5rem);
+            } // 768px+
+        }
+    }
+}
+
+.quote-deco {
+    font-size: clamp(4rem, 9vw, 11rem);
+    color: $accent-inspire;
+    opacity: 0.18;
+    line-height: 1;
+    margin-bottom: -1.5rem;
+    pointer-events: none;
+    display: block;
+}
+
+.motivation-1 {
+    display: flex;
+    align-items: center;
+    margin-bottom: $sp-lg;
+
+    @media (min-width: 48em) {
+        margin-bottom: $sp-xl;
+    }
+
+    h2 {
+        background: rgba(192, 132, 252, 0.14);
+        border: 1px solid rgba(192, 132, 252, 0.28);
+        padding: 0.6em $sp-lg;
+        border-radius: 2em;
+        font-size: $fs-sm;
+        font-weight: $fw-semi;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: rgba(192, 132, 252, 0.9);
+    }
+}
+
+.motivation-2 {
+    padding-bottom: $sp-xl;
+
+    @media (min-width: 48em) {
+        padding-bottom: $sp-3xl;
+    }
+
+    p {
+        font-size: $fs-quote;
+        font-weight: $fw-semi;
+        color: var(--pri);
+        line-height: 1.55;
+        font-style: italic;
+        letter-spacing: -0.02em;
+        text-shadow: 0 0.2rem 2rem rgba(0, 0, 0, 0.25);
+        transition: color 0.35s ease;
+    }
+}
+
+.motivation-3 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    span {
+        display: inline-block;
+        background: linear-gradient(135deg, $accent-inspire, rgba(192, 132, 252, 0.7));
+        color: #fff;
+        padding: 0.8em $sp-xl;
+        border-radius: 2em;
+        font-size: $fs-md;
+        font-weight: $fw-bold;
+        letter-spacing: 0.03em;
+        box-shadow: 0 0.4rem 2rem rgba(192, 132, 252, 0.3);
+    }
+}
+
+// ════════════════════════════════════════════════════════
+//  FOCUS TIMER — MOBILE FIRST
+// ════════════════════════════════════════════════════════
+.pomodoro-fullpage {
+    position: fixed;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    background-image: radial-gradient(ellipse at 50% 55%, var(--pomo-tint) 0%, transparent 65%);
+    transition: background-image 1.4s ease;
+}
+
+.pomo-body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+
+    // Mobile: tight padding
+    padding: $sp-md;
+
+    @media (min-width: 30em) {
+        padding: $sp-lg;
+    } // 480px
+    @media (min-width: 48em) {
+        padding: $sp-xl $sp-2xl;
+    } // 768px+
+}
+
+.pomo-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(160deg, var(--tri2) 0%, rgba(116, 81, 45, 0.4) 60%, rgba(74, 222, 128, 0.06) 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    transition: var(--theme-transition);
+
+    // Mobile: tighter, wider
+    width: min(40rem, 94%);
+    padding: $sp-lg $sp-md $sp-xl;
+    gap: $sp-lg;
+
+    @media (min-width: 30em) {
+        width: min(44rem, 92%);
+        padding: $sp-xl $sp-lg $sp-2xl;
+        gap: $sp-xl;
+    } // 480px
+    @media (min-width: 48em) {
+        width: min(52rem, 88%);
+        padding: $sp-2xl $sp-3xl $sp-3xl;
+        gap: $sp-xl;
+    } // 768px+
+
+    // Landscape: horizontal layout
+    @media (max-height: 31.25em) and (orientation: landscape) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 90%;
+        gap: $sp-md;
+        align-items: center;
+        justify-content: center;
+        padding: $sp-md $sp-xl;
+    }
+}
+
+.dark .pomo-card {
+    background: linear-gradient(
+        160deg,
+        rgba(30, 32, 40, 0.95) 0%,
+        rgba(20, 22, 28, 0.8) 60%,
+        rgba(74, 222, 128, 0.06) 100%
+    );
+}
+
+.session {
+    display: inline-block;
+    padding: 0.6em $sp-xl;
+    font-size: $fs-sm;
+    font-weight: $fw-bold;
+    border-radius: 2em;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--green);
+    color: #fff;
+    box-shadow: 0 0.3rem 1.2rem rgba(65, 149, 65, 0.35);
+    transition:
+        background-color 0.6s ease,
+        box-shadow 0.6s ease;
+    flex-shrink: 0;
+}
+
+// ── SVG ring removed — plain time display ──────────────
+.pomo-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: $sp-2xl 0;
+}
+
+.pomo-time {
+    font-size: $fs-pomo;
+    font-weight: $fw-black;
+    color: var(--pri);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    text-shadow:
+        0 0.3rem 3rem rgba(254, 186, 23, 0.3),
+        0 0 6rem rgba(254, 186, 23, 0.15);
+    transition: color 0.35s ease;
+}
+
+.pomo-label {
+    font-size: $fs-xs;
+    font-weight: $fw-semi;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: var(--pri);
+    opacity: 0.32;
+    transition: color 0.35s ease;
+}
+
+.pomo-btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    // Mobile: tighter gap
+    gap: $sp-xs;
+
+    @media (min-width: 30em) {
+        gap: $sp-sm;
+    } // 480px+
+}
+
+.pomo-btns button {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    box-shadow: 0 0.4rem 0 rgba(0, 0, 0, 0.35);
+    transition: var(--transition);
+    font-weight: $fw-bold;
+    color: var(--pri);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+
+    @supports (backdrop-filter: blur(1px)) {
+        backdrop-filter: blur(0.8rem);
+    }
+
+    // Mobile: compact buttons
+    padding: 0.9em $sp-lg;
+    font-size: $fs-sm;
+
+    @media (min-width: 30em) {
+        padding: 1em $sp-xl;
+        font-size: $fs-md;
+    } // 480px
+    @media (min-width: 48em) {
+        padding: 1.1em $sp-2xl;
+    } // 768px+
+
+    &:hover {
+        background: rgba(254, 186, 23, 0.14);
+        border-color: rgba(254, 186, 23, 0.3);
+        transform: translateY(-0.2rem);
+        box-shadow: 0 0.6rem 0 rgba(0, 0, 0, 0.35);
+    }
+    &:active {
+        transform: translateY(0.2rem);
+        box-shadow: 0 0.1rem 0 rgba(0, 0, 0, 0.35);
+    }
+}
+
+// ════════════════════════════════════════════════════════
+//  LANDSCAPE PHONES (height ≤ 500px)
+// ════════════════════════════════════════════════════════
+@media (max-height: 31.25em) and (orientation: landscape) {
+    section.allElems {
+        padding: $sp-xs $sp-sm;
+        gap: 0.3vh;
+    }
+
+    .allElems header {
+        flex-direction: row;
+        align-items: center;
+        height: auto;
+        min-height: 6rem;
+        max-height: min(28vh, 8.5rem);
+        padding: $sp-xs $sp-md;
+        gap: 0;
+    }
+
+    .header-1 {
+        gap: 0.15rem;
+        h1 {
+            font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+        }
+    }
+
+    .header-2 {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        text-align: right;
+        align-items: center;
+        gap: 0.2rem $sp-xs;
+        padding: $sp-xs $sp-sm;
+    }
+
+    .weather-stats {
+        flex-direction: row;
+        border-left: 1px solid rgba(255, 255, 255, 0.12);
+        border-top: none;
+        padding: 0 0 0 $sp-xs;
+        margin: 0;
+        h3 {
+            font-size: 0.88rem;
+            line-height: 1.3;
+            justify-content: flex-end;
+        }
+    }
+
+    .allFeatures {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .daily-planner-fullpage .day-planner {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
