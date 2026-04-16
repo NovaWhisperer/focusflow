@@ -1,25 +1,30 @@
-# FocusFlow — Productivity Dashboard
+# FocusFlow
 
-A clean, mobile-first productivity dashboard with real-time weather, task board, day planner, daily inspiration, and a focus timer. Built with vanilla HTML, SCSS, and JavaScript — no frameworks, no dependencies.
+FocusFlow is a lightweight, mobile-first productivity dashboard that combines live weather, a task board, a day planner, daily inspiration, and a Pomodoro-style focus timer in one interface. It uses vanilla HTML, SCSS, and JavaScript, with no framework or runtime dependency.
 
----
+Live demo: https://focusflow-psi-tawny.vercel.app
 
-## ✨ Features
+## Quick Facts
 
-| Feature | Description |
+- Full-screen cards open into dedicated workspace panels
+- Weather-aware header imagery and theme color
+- Tasks, planner entries, and quote content are handled without a backend
+- Designed and tested for mobile, tablet, and desktop layouts
+
+## Features
+
+| Feature | What it does |
 |---|---|
-| 🌤️ **Live Weather** | Real-time conditions via Open-Meteo API (temp, humidity, precipitation, wind) |
-| 🕐 **Live Clock** | Date and time updated every second, 12-hour format |
-| ✅ **Task Board** | Add, detail, flag as important, and mark tasks done — persisted via localStorage |
-| 📅 **Day Planner** | 18 hourly slots (6:00–23:00), auto-saved as you type |
-| 💬 **Daily Inspiration** | Random motivational quote fetched on every visit |
-| ⏱️ **Focus Timer** | 25-min work / 5-min break Pomodoro cycle |
-| 🌙 **Dark Mode** | Toggle between warm light and cool dark theme |
-| 📱 **Fully Responsive** | Mobile-first — tested on iPhone SE, iPhone 14 Pro Max, tablet, and desktop |
+| Live Weather | Pulls current conditions from Open-Meteo, including temperature, humidity, precipitation, and wind |
+| Live Clock | Updates the date and time every second in the header |
+| Task Board | Lets you add tasks, include details, mark items important, and remove completed items |
+| Day Planner | Provides 18 hourly slots from 6:00 to 23:00 with automatic local persistence |
+| Daily Inspiration | Fetches a random motivational quote on load, with a fallback message if the request fails |
+| Focus Timer | Runs a 25-minute work session and a 5-minute break cycle with start, pause, and reset controls |
+| Theme Support | Includes a dark mode toggle and weather/time-aware background switching |
+| Responsive Layout | Uses a mobile-first design with distinct portrait assets for smaller screens |
 
----
-
-## 🖥️ Preview
+## Preview
 
 ### Desktop
 ![Desktop View](./assets/preview-desktop.png)
@@ -27,114 +32,90 @@ A clean, mobile-first productivity dashboard with real-time weather, task board,
 ### Mobile
 ![Mobile View](./assets/preview-mobile.png)
 
----
+## How It Works
 
-## 📁 Project Structure
+The home screen presents four cards: Task Board, Day Planner, Inspire Me, and Focus Timer. Selecting a card opens a full-screen workspace, while the navigation bar is hidden to keep attention on the active task.
 
-```
-FocusFlow/
-├── index.html          # Main HTML
-├── style.scss          # Source styles (mobile-first SCSS)
-├── style.css           # Compiled CSS
-├── script.js           # Vanilla JS
-└── assets/
-    ├── Morning.png               # Header background — morning
-    ├── Evening.png               # Header background — evening
-    ├── Night.png                 # Header background — night
-    ├── Task Board.png            # Card image — landscape
-    ├── Day Planner.png           # Card image — landscape
-    ├── Inspire Me.png            # Card image — landscape
-    ├── Focus Time.png            # Card image — landscape
-    ├── Task Board Portrait.png   # Card image — portrait (mobile)
-    ├── Day Planner Portrait.png  # Card image — portrait (mobile)
-    ├── Inspire Me Portrait.png   # Card image — portrait (mobile)
-    ├── Focus Time Portrait.png   # Card image — portrait (mobile)
-    └── favicon.svg
-```
+The header combines live date/time with current weather data and updates the visual theme based on time of day and weather conditions. LocalStorage is used to persist tasks, planner entries, and weather cache data across visits.
 
----
+## Getting Started
 
-## 🚀 Getting Started
+No build step is required to run the app. The compiled CSS is already included, so you can open the project immediately after cloning.
 
-No build step required for HTML and JS. SCSS compilation is only needed if you want to edit styles.
-
-### 1. Clone the repo
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/NovaWhisperer/focusflow.git
 cd focusflow
 ```
 
-### 2. Open in browser
+### 2. Open the app
 
-Just open `index.html` directly — or use a local server for best results:
+Open `index.html` directly in a browser, or use a local server for a smoother experience.
 
 ```bash
-# With Node
 npx serve .
 ```
 
-Or use the **Live Server** extension in VS Code.
+If you prefer VS Code, the Live Server extension also works well.
 
-### 3. Compile SCSS (optional — `style.css` is already included)
+### 3. Edit styles
+
+If you change the SCSS source, recompile it into the CSS file used by the app.
 
 ```bash
 sass style.scss style.css --watch
 ```
 
-> ⚠️ Weather requires a network connection. If offline, the dashboard falls back to a time-based background image.
+## Configuration
 
----
-
-## 🛠️ Tech Stack
-
-- **HTML5** — semantic, accessible markup
-- **SCSS** — compiled to CSS, no runtime dependency
-- **Vanilla JavaScript** — ES2020+, no frameworks
-- **[Open-Meteo API](https://open-meteo.com/)** — free weather data, no API key needed
-- **[dummyjson API](https://dummyjson.com/)** — random motivational quotes
-- **[Remixicon](https://remixicon.com/)** — icon library via CDN
-- **[Poppins](https://fonts.google.com/specimen/Poppins)** — typeface via Google Fonts
-
----
-
-## 📍 Changing Your Location
-
-Open `script.js` and edit the `CONFIG` object at the very top of the file:
+To change the default location shown in the weather widget, update the `CONFIG` object near the top of `script.js`.
 
 ```js
 const CONFIG = {
     location: {
-        name:      "Hamirpur (HP)",   // shown in the UI
-        latitude:  31.68,             // your latitude
-        longitude: 76.52,             // your longitude
-        timezone:  "Asia/Kolkata",    // your timezone
+        name: "Hamirpur (HP)",
+        latitude: 31.68,
+        longitude: 76.52,
+        timezone: "Asia/Kolkata",
     }
 };
 ```
 
-- Find your coordinates → [latlong.net](https://www.latlong.net)
-- Find your timezone string → [timezonefinder.michelfe.eu](https://timezonefinder.michelfe.eu)
+Helpful references:
 
-The weather cache updates automatically when you change the coordinates.
+- Coordinates: https://www.latlong.net
+- Timezone lookup: https://timezonefinder.michelfe.eu
 
----
+The weather cache automatically refreshes when the coordinates change.
 
-## 📱 Responsive Breakpoints
+## Tech Stack
+
+- HTML5 for semantic structure
+- SCSS for source styling and design tokens
+- Vanilla JavaScript for interactions and data persistence
+- Open-Meteo API for live weather data
+- dummyjson API for random quotes
+- Remixicon for icons
+- Poppins from Google Fonts for typography
+
+## Responsive Breakpoints
 
 | Breakpoint | Target |
 |---|---|
-| Base (default) | Mobile `< 480px` |
-| `min-width: 480px` | Small phones / landscape |
-| `min-width: 768px` | Tablet |
-| `min-width: 1200px` | Desktop |
+| Base | Mobile screens below 480px |
+| 480px and up | Small phones and landscape layouts |
+| 768px and up | Tablets |
+| 1200px and up | Desktop |
 
----
+## Notes
 
-## 📄 License
+- Weather data requires an internet connection.
+- If weather data is unavailable, the dashboard falls back to a time-based background.
+- The app is optimized for modern browsers.
 
-MIT — free to use, modify, and distribute.
+## License
 
----
+MIT. Free to use, modify, and distribute.
 
-<p align="center">Built with ☕ and patience.</p>
+Built with patience and focus.
